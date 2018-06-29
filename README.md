@@ -13,7 +13,7 @@
 
 ### wtf ?
 
-this repository holds algorave research, collections, projects, et cetera.
+this repository holds algorave code, research, collabs, resources et cetera.
 
 ### refs
 
