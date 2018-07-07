@@ -9,7 +9,7 @@ Clock.bpm = 80
 ~p5 >> play('!', dur=16, amp=[0,1], rate=.25)
 
 ~s1 >> piano(P[0,1,5,3]+(0,2), dur=8, oct=4, pan=(-1,1)).spread()
-~s2 >> space(P[0], dur=PDur(3,8)*2).every(6,'offadd',[5,7],cycle=8)
+~s2 >> space(P[0], dur=PDur(3,8)*2).every(6, 'offadd', [5,7], cycle=8)
 ~s3 >> glass(P[0,1]+(0,12), dur=8, oct=(4,5))
 ~s4 >> ambi(P[1,2]+(0,2), dur=8, scale=Scale.minor)
 
