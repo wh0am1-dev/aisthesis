@@ -1,4 +1,8 @@
-n1 >> noise(
+Scale.default = Scale.major
+Root.default = 0
+Clock.bpm = 120
+
+~n1 >> noise(
     P(PSine(32),PSine(24),PSine(27),PSine(18)*.7,PSine(45)),
     amp=P(.8,.7,.8,.7,.9)*.4,
     delay=P(PRange(5)/5),
@@ -9,14 +13,14 @@ n1 >> noise(
     lpr=(linvar([0,6],64), linvar([3,0],53))
 )
 
-b1 >> blip(
-    PRand(8) + (0, PRand(4)),
-    oct=5,
-    dur = PRand(2,12) * 1.5,
-    delay=(0,PRand(b1.dur)/8),
+~b1 >> blip(
+    PRand(8) + P(0, PRand(4)),
+    oct = 5,
+    dur = PRand(2, 12) * 1.5,
+    delay = (0, PRand(b1.dur) / 8),
     amp = 0.8,
     formant = 1
-).follow(k1).offbeat()
+)
 
 def k1solo():
     k1.solo()
@@ -26,7 +30,8 @@ def k1stopsolo():
     #Clock.schedule(k1solo, Clock.now() + 16)
 k1solo()
 
-s1 >> soprano([0,4,(3,1),2]
+s1 >> soprano(
+    [0,4,(3,1),2],
     dur=8,
     sus=s1.dur/2,
     amp=.5,
@@ -51,9 +56,8 @@ b1 >> bass(
     formant = (0,1)
 )
 
-Group(k1).every(4, "solo")
+k1 >> soft(P[[1, 4, 9, [6, 9, 11]], [3, 5, 7, [6, 9, 11]]], dur=2, sus=20, amp=4, echo=2)
 
-
-k1 >> soft([P*[1,4,9, [6, 9, 11]],P*[3,5,7,[6, 9, 11]]], dur = 2, sus = 20, amp = 4, echo = 2)
+k1.solo()
 
 
