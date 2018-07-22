@@ -4,7 +4,7 @@ Clock.bpm = 110
 
 ~p1 >> play('g', dur=1, rate=(.125,.0625), pan=[-1,1], lpf=200)
 ~p2 >> play('f', dur=PDur(3,16), sample=2)
-~p3 >> play('t', dur=P[.5,.25,.25]*2)
+~p3 >> play('t', dur=P[1,.5,.5])
 ~p4 >> play('A', dur=1).every([5,5,6], 'stutter', 3, n=2)
 
 p4.lpf = 800
@@ -16,4 +16,3 @@ p4.lpf = 800
 s1.coarse = PRand([2,4,6,8,12,16])
 s1.chop = 4
 s1.slide = -1
-

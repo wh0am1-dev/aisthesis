@@ -39,7 +39,7 @@ def _vision(time=9999):
 kick = Player()
 def _kick(time=9999):
     kick.reset() >> play(
-        'X    X',
+        'X    ( XX)',
         dur = 2/3,
         lpf = 800,
         amp = .8,
@@ -53,5 +53,3 @@ def _cow(time=9999):
         amp = .8,
         lpf = 2000,
     ).after(time, 'stop')
-
-

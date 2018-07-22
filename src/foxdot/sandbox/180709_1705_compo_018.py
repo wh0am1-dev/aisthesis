@@ -12,4 +12,3 @@ p_all.rate = .5
 ~s1 >> space(P[0,3,5,1]+(0,3), dur=4, chop=6, slide=0, echo=.5, room=.5, mix=.5)
 
 ~s2 >> glass(P[0,3,5,var([1,8,7],[16,8,8])], oct=4, amp=2)
-

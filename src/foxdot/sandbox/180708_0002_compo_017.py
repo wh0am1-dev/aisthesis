@@ -19,4 +19,3 @@ def h_synth():
     print(SynthDefs)
 def h_att():
     print(Player.get_attributes())
-
