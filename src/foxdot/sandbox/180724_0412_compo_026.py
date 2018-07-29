@@ -29,3 +29,8 @@ Root.default = 0
 p3.stop()
 p4.stop()
 s1.stop()
+s5.stop()
+s2.stop()
+s3.stop()
+p2.solo()
+

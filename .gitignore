@@ -1,0 +1,4 @@
+.DS_Store
+*.hist
+env/
+venv/
