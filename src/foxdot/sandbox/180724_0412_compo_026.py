@@ -13,6 +13,7 @@ print(Clock.playing)
 ~p2 >> play('n', dur=.5, room=.5, mix=.5, lpf=5000, amp=.6).often('stutter')
 ~p3 >> play('<Vs><  f >', lpf=0, amp=.5).every(5, 'stutter', 4, dur=3, cycle=8)
 ~p4 >> play('I', dur=2, delay=1)
+~p5 >> play('{ ppP[pP][Pp][pP  ][Pp  ][ pP ][ Pp ][  pP][  Pp]}', sample=2, rate=PRand([.25,.5,1,2]), dur=1, shape=PWhite(0,.25), amp=1.5)
 
 ~s1 >> feel(P[5,2,3,1]+(0,var([1,2],8)), dur=1, oct=(4,5), amp=.8, drive=.05)
 ~s2 >> spark(P[5,2,3,1]+(0,2,4), dur=4, delay=(0,.5,1), amp=.5, oct=4, vib=.2)
@@ -26,6 +27,18 @@ Root.default = 2
 Scale.default = Scale.minorPentatonic
 Root.default = 0
 
+p3.amp = .25
+
+# fade
+Group(p1, p2, p4, s4, s5).amp = linvar([1,.1],32)
+Group(p1, p2, p4, s4, s5).lpf = linvar([4000,200],32)
+Group(p1, p2, p4, s4, s5).lpr = linvar([1,.1],32)
+
+# down
+Group(p1, p2, p4, s4, s5).amp = .2
+Group(p1, p2, p4, s4, s5).lpf = 200
+Group(p1, p2, p4, s4, s5).lpr = .1
+
 p3.stop()
 p4.stop()
 s1.stop()
@@ -33,4 +46,3 @@ s5.stop()
 s2.stop()
 s3.stop()
 p2.solo()
-
