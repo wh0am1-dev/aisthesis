@@ -27,7 +27,7 @@ Group(s3, s4, p1, p2, p4).only()
 Group(s3, s4, p1, p2).only()
 
 ### > block <
-Group(s3, s4, p1, p2).stop()
+nextBar(Group(s3, s4, p1, p2).stop)
 ~q0 >> play('!', amp=.5, dur=8, room=1, mix=.5, echo=2, decay=16, rate=.25)
 Clock.future(7, Clock.clear)
 ###
