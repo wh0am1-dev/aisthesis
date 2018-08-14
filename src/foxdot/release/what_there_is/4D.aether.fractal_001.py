@@ -2,22 +2,28 @@ Scale.default = 'minor'
 Root.default = 0
 Clock.bpm = 120
 
+def one23(mod, f):
+    if Clock.now() % mod == mod - 1:
+        f()
+    else:
+        Clock.future(1, lambda: go(mod))
+
 var.ch = var([5,1,3,0],8)
 
 ~p1 >> play('x(...v)v', amp=.8, dur=2/3, room=1).often('rate.offmul', 1.5, 1/3)
 
-~p1 >> play('x(.e.|q(01)|)v', amp=.8, dur=2/3, room=1).often('rate.offmul', 1.5, 1/3)
+~p1 >> play('x(.|p4|.|q1|)v', amp=.8, dur=2/3, room=1).every(23, 'jump', ahead=-1, rate=1.5, cycle=24)
 
-~s1 >> sawbass(var.ch, amp=.6, dur=8, chop=8, coarse=16, cutoff=linvar([1000,7000],32), room=1).every(6, 'offadd', 7, 1/3)
+~s1 >> sawbass(var.ch, amp=.6, dur=8, chop=8, coarse=16, cutoff=linvar([1000,7000],32), room=1).every(8, 'offadd', 7, 1/3)
 
 ~s3 >> donk([0,[3,4,7]], amp=.1, dur=PDur(3,8), oct=[5,6,4], drive=.5).every(5, 'stutter', 2, dur=.5, oct=6)
 
 ~p2 >> play('V.', amp=.6, lpf=800, room=1)
 
-~s2 >> space(var.ch+[0,[7,5],3,[4,2]], amp=.6, dur=2, room=1, oct=4, shape=.125).spread()
-~s2 >> space(var.ch+[0,[7,5],3,[4,2]]+(0,2), amp=.6, dur=2, room=1, oct=4, shape=.125).spread()
-~s2 >> space(var.ch+[0,[7,5],3,[4,2]]+(0,[-2,2]), amp=.6, dur=2, room=1, oct=4, shape=.125, delay=(0,[.5,1])).spread()
-~s2 >> space(var.ch+[0,[7,5],3,[4,2]]+(0,[-2,2]), amp=.6, dur=2, room=1, oct=4, shape=.125, delay=(0,[.5,1])).spread().every(3, 'stutter', 2, dur=1, cycle=4)
+~s2 >> space(var.ch+[0,[7,5],3], amp=.6, dur=[2,2,4], room=1, oct=4, shape=.125).spread()
+~s2 >> space(var.ch+[0,[7,5],3], amp=linvar([.6,0],[2,0,2,0,4,0]), dur=[2,2,4], room=1, oct=4, shape=.125, chop=P[4,4,8]).spread()
+~s2 >> space(var.ch+[0,[7,5],3]+(0,2), amp=linvar([.6,0],[2,0,2,0,4,0]), dur=[2,2,4], room=1, oct=4, shape=.125, chop=P[4,4,8]).spread()
+~s2 >> space(var.ch+[0,[7,5],3]+(0,2), amp=linvar([.6,0],[2,0,2,0,4,0]), dur=[2,2,4], room=1, oct=4, shape=.125, chop=P[4,4,8], delay=(0,[.5,.5,1])).spread().sometimes('offadd', 5)
 
 ~s4 >> klank((0,2,4), amp=.8, dur=8)
 
@@ -25,11 +31,12 @@ var.ch = var([5,1,3,0],8)
 
 p_all.stop()
 
-~s2 >> space(var.ch+[0,[7,5],3,[4,2]]+(0,[-2,2]), amp=.6, dur=2, room=1, oct=4, shape=.125, delay=(0,[.5,1]), chop=var([3,4,6,8],8)).spread().every(3, 'stutter', 2, dur=1, cycle=4)
-
 ### > block <
-Group(s1,s2).stop()
-~s3 >> donk([0,[3,4,7]], amp=.1, dur=PDur(3,8), oct=[5,6,4], drive=.5).every(5, 'stutter', 2, dur=.5, oct=6).penta()
+s2.every(4, 'degrade')
+def go_penta():
+    Group(s1,s2).stop()
+    ~s3 >> donk([0,[3,4,7]], amp=.1, dur=PDur(3,8), oct=[5,6,4], drive=.5).every(5, 'stutter', 2, dur=.5, oct=6).penta()
+Clock.future(16, go_penta)
 ###
 
 ~s4 >> klank((0,2,4), amp=.8, dur=8, formant=1)
