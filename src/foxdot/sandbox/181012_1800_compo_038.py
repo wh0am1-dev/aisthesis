@@ -20,4 +20,3 @@ var.ch = var([0,3,1,5], 8)
 ~s2 >> noise(var.ch+PWhite(), amp=PRand([0,.2])[:32], dur=.5, sus=.25, oct=6, room=1, pan=linvar([-1,1],16))
 ~s3 >> dbass(var.ch, amp=.05, dur=PDur(3,16)*4, oct=3, room=1, shape=.75, formant=(-1,1))
 ~s4 >> piano(var.ch+PWalk(), amp=PRand([0,.4,.6])[:64], oct=PRand([4,5,6])[:32], dur=1/3, room=1, pan=PWhite(-1,1)).penta()
-
