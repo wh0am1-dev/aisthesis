@@ -1,0 +1,14 @@
+{
+  "IMPORTED": {
+    "header": {
+      "PATH": "img/header.jpg",
+    },
+    "bacchus": {
+      "PATH": "img/bacchus.jpg",
+    },
+  },
+  "vertexMode": "LINES",
+  "pixelRatio": 1,
+  "audio": true,
+  "midi": true,
+}
