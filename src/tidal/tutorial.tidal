@@ -1,0 +1,102 @@
+-- 0. tidalcycles tutorial --
+-- ======================= --
+
+-- :: controls :: --
+-- shift-enter:    run line
+-- ctrl-enter:     run block (?)
+-- super-shift-h:  hush
+
+-- :: dirt connections :: --
+-- [ d1 .. d16 ] <=> [ "1" .. "16" ]
+
+-- :: samples folder :: --
+-- %localappdata%/supercollider/downloaded-quarks/dirt-samples/*
+
+
+
+-- 1. creating rhythmic sequences --
+-- ============================== --
+
+d1 $ sound "bd"         -- play bd[0] sample
+d1 $ sound "bd:3"       -- play bd[3] sample
+d1 $ sound "bd" # n "2" -- play bd[2] sample
+
+d1 $ sound "bd sd:1"
+d2 $ sound "hh hh hh hh"
+d3 $ sound "arpy"
+
+d3 silence -- stop conn
+hush       -- stop all
+
+p "alice" $ sound "bd sd" -- named patterns
+p "alice" silence
+
+d1 $ sound "bd sd"
+d1 $ sound "bd sd hh cp mt arpy drum"
+d1 $ sound "bd sd hh cp mt arpy drum odx bd arpy bass2 feel future"
+
+
+
+-- 2. silence --
+-- ========== --
+
+d1 $ sound "bd"
+d2 $ sound "~ cp"
+
+solo "1"
+unsolo "1"
+
+d1 silence
+hush
+
+
+
+-- 3. patterns within patterns --
+-- =========================== --
+
+-- played in a single step
+d1 $ sound "[bd sd sd] cp"
+d1 $ sound "bd [sd sd sd]"
+d1 $ sound "[bd bd] [sd sd sd sd]"
+d1 $ sound "[bd bd bd] [sd sd]"
+
+-- pattern nesting
+d1 $ sound "[bd bd] [bd sd [sd sd]]"
+
+-- marking out feet
+d1 $ sound "[bd bd] [sd sd sd] [bd sd]"
+d1 $ sound "bd bd . sd sd sd . bd sd"
+-- nesting... (?)
+
+-- polyrhythms
+d1 $ sound "[bd bd bd, sd cp sd cp]"
+d1 $ sound "[bd bd bd, sd cp sd cp, arpy arpy, odx]"
+
+-- cycle
+d1 $ sound "[bd <arpy:1 arpy:2 arpy:3>]"
+
+
+
+-- 4. pattern repetition and speed --
+-- =============================== --
+
+d1 $ sound "bd*2" -- double speed
+d1 $ sound "bd/2" -- half speed
+
+d1 $ sound "[bd sn]*2 cp"
+d1 $ sound "[bd sn] cp/2"
+d1 $ sound "[[bd sn] cp]*2"
+d1 $ sound "[[bd sn] cp]/2"
+
+d1 $ sound "[bd sn sn*3]/2 [bd sn*3 bd*4]/3"
+d1 $ sound "[bd [sn sn]*2]/2 [bd [sn bd]/2]*2"
+
+
+
+-- 5. sequence functions --
+-- ===================== --
+
+d1 $ rev (sound "bd*2 [bd [sn sn*2 sn] sn]")
+
+-- resume: https://tidalcycles.org/index.php/Tutorial#Modifying_Sequences_With_Functions
+-- it's too late... 🌙
